@@ -1,3 +1,11 @@
-<textarea [(ngModel)]='document.doc' (keyup)='editDoc()' placeholder='Start typing...'>
+<!-- <textarea [(ngModel)]='document.doc' (keyup)='editDoc()' placeholder='Start typing...'>
 
-</textarea>
+</textarea> -->
+<div class="second_side">
+    <p>room: {{document.id}}</p>
+    <p>doc: {{document.doc}}</p>
+    <div *ngFor="let user of document.users">
+        <p>user: {{user}}</p>
+    </div>
+    <button (click)="editDoc()">edit</button>
+</div>

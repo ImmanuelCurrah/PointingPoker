@@ -17,12 +17,9 @@ export class DocumentListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.documents = this.documentService.documents;
-    this._docSub = this.documentService.currentDocument.subscribe((doc) => {
-      if (doc.id) {
-        this.currentDoc = doc.id;
-        console.log(doc.id, doc);
-      }
-    });
+    this._docSub = this.documentService.currentDocument.subscribe(
+      (doc) => (this.currentDoc = doc.id)
+    );
   }
 
   ngOnDestroy() {

@@ -16,8 +16,11 @@ export class DocumentService {
   }
 
   newDocument() {
-    console.log('here in serve new doc');
-    this.socket.emit('addDoc', { id: this.docId(), doc: '' });
+    this.socket.emit('addDoc', {
+      id: this.docId(),
+      doc: '',
+      users: [],
+    });
   }
 
   editDocument(document: Document) {
@@ -25,14 +28,14 @@ export class DocumentService {
   }
 
   private docId() {
-    let text = '';
+    let docId = '';
     const possible =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+      docId += possible.charAt(Math.floor(Math.random() * possible.length));
     }
 
-    return text;
+    return docId;
   }
 }
