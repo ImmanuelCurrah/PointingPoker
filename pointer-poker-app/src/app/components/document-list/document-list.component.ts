@@ -11,6 +11,7 @@ import { DocumentService } from 'src/app/services/document.service';
 export class DocumentListComponent implements OnInit, OnDestroy {
   documents: Observable<string[]>;
   currentDoc: string;
+  roomIds: string[];
   private _docSub: Subscription;
 
   constructor(private documentService: DocumentService) {}
@@ -20,6 +21,7 @@ export class DocumentListComponent implements OnInit, OnDestroy {
     this._docSub = this.documentService.currentDocument.subscribe(
       (doc) => (this.currentDoc = doc.id)
     );
+    this.documents.subscribe((roomIds) => (this.roomIds = roomIds));
   }
 
   ngOnDestroy() {

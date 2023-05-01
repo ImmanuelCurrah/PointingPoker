@@ -20,11 +20,16 @@ export class DocumentService {
       id: this.docId(),
       doc: '',
       users: [],
+      currentUser: '',
     });
   }
 
   editDocument(document: Document) {
     this.socket.emit('editDoc', document);
+  }
+
+  sendCurrentUser(user: string) {
+    this.socket.emit('currentUser', user);
   }
 
   private docId() {

@@ -1,0 +1,5 @@
+<div class="voting-selection">
+    <div *ngFor="let vote of possibleVotes">
+        <button (click)="selectVote(vote)" class="voting-button">{{vote}}</button>
+    </div>
+</div>

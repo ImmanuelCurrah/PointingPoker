@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { startWith, tap } from 'rxjs/operators';
+import { startWith } from 'rxjs/operators';
 import { Document } from 'src/app/models/document.model';
 import { DocumentService } from 'src/app/services/document.service';
 
@@ -15,6 +15,9 @@ export class DocumentComponent implements OnInit, OnDestroy {
   document: Document;
   private _docSub: Subscription;
 
+  vote: number;
+
+  count: number = 0;
 
   ngOnInit(): void {
     this._docSub = this.documentService.currentDocument
@@ -23,12 +26,7 @@ export class DocumentComponent implements OnInit, OnDestroy {
           id: '',
           doc: 'Select an existing document or create a new one to get started',
           users: [],
-        }),
-        tap((document) => {
-          document.users.forEach((user, index) => {
-            localStorage.setItem(`user${index}`, user);
-          });
-          console.log(document);
+          currentUser: '',
         })
       )
       .subscribe((document) => (this.document = document));
@@ -39,8 +37,12 @@ export class DocumentComponent implements OnInit, OnDestroy {
   }
 
   editDoc() {
-    this.document.doc = 'ahaha';
-    console.log(this.document);
+    this.document.doc = `I have been indeed... edited ${this.count} times`;
     this.documentService.editDocument(this.document);
+    this.count += 1;
+  }
+
+  handleVote(vote: number): void {
+    this.vote = vote;
   }
 }

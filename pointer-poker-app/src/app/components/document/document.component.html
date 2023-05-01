@@ -1,11 +1,10 @@
-<!-- <textarea [(ngModel)]='document.doc' (keyup)='editDoc()' placeholder='Start typing...'>
-
-</textarea> -->
 <div class="second_side">
     <p>room: {{document.id}}</p>
     <p>doc: {{document.doc}}</p>
+    <p>currentUser: {{document.currentUser}}</p>
     <div *ngFor="let user of document.users">
         <p>user: {{user}}</p>
+        <app-voting-cart [vote]="vote" [currentUser]="document.currentUser" [users]="document.users"></app-voting-cart>
     </div>
-    <button (click)="editDoc()">edit</button>
+    <app-voting-number-selection (vote)="handleVote($event)"></app-voting-number-selection>
 </div>
